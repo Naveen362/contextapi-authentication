@@ -54,12 +54,16 @@ app.post('/login', async(req,res)=>{
     console.log('Received login request:', { username, password });
     const user = await User.findOne({ username });
     if (!user) {
+
       return res.status(400).json({ message: 'Invalid username or password' });
+
+      
     }
  
     // Check if password matches
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
+
       return res.status(400).json({ message: 'Invalid username or password' });
     }
 
